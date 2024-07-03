@@ -1,0 +1,37 @@
+<!-- src/main/resources/templates/car/list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Coches</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <h1>Lista de Coches</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Color</th>
+                <th>Exposición</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Número de Serie</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre la lista de coches -->
+            <tr th:each="car : ${cars}">
+                <td th:text="${car.id}">1</td>
+                <td th:text="${car.color}">Rojo</td>
+                <td th:text="${car.exposicion}">Exposición A</td>
+                <td th:text="${car.marca}">Toyota</td>
+                <td th:text="${car.modelo}">Corolla</td>
+                <td th:text="${car.num_serie}">ABC123</td>
+                <td th:text="${car.precio}">$25000.00</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

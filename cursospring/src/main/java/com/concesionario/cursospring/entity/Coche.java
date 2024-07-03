@@ -1,4 +1,4 @@
-package com.concesionario.cursospring.entitys;
+package com.concesionario.cursospring.entity;
 
 import java.io.Serializable;
 
@@ -10,21 +10,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "concesionario")
+@Table(name = "coche")
 public class Coche implements Serializable{
+	
 
-	Long id;
+	long id;
 	String marca;
 	String modelo;
 	String color;
 	String numeroSerie;
-	Double precio;
-	Boolean exposicion;
+	double precio;
+	boolean exposicion;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -69,7 +70,7 @@ public class Coche implements Serializable{
 	}
 
 	@Column(name = "precio")
-	public Double getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
@@ -78,7 +79,7 @@ public class Coche implements Serializable{
 	}
 
 	@Column(name = "exposicion")
-	public Boolean getExposicion() {
+	public boolean getExposicion() {
 		return exposicion;
 	}
 
@@ -90,7 +91,7 @@ public class Coche implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -103,10 +104,7 @@ public class Coche implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Coche other = (Coche) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		return true;
 	}
