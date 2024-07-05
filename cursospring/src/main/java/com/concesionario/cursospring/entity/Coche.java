@@ -12,7 +12,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "coche")
 public class Coche implements Serializable{
-	
 
 	long id;
 	String marca;

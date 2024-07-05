@@ -1,0 +1,6 @@
+com\concesionario\cursospring\controller\CocheController.class
+com\concesionario\cursospring\config\WebSecurityConfig.class
+com\concesionario\cursospring\entity\Coche.class
+com\concesionario\cursospring\CursospringApplication.class
+com\concesionario\cursospring\service\CocheService.class
+com\concesionario\cursospring\repository\CocheRepository.class

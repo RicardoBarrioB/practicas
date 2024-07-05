@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Coche</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <h1>Nuevo Coche</h1>
+    <form th:action="@{/coches/nuevo}" th:object="${coche}" method="post">
+        <div>
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" th:field="*{marca}" required />
+        </div>
+        
+        <div>
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" th:field="*{modelo}" required />
+        </div>
+        
+        <div>
+            <label for="color">Color:</label>
+            <input type="text" id="color" th:field="*{color}" required />
+        </div>
+        
+        <div>
+            <label for="numeroSerie">Número de Serie:</label>
+            <input type="text" id="numeroSerie" th:field="*{numeroSerie}" required />
+        </div>
+        
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" th:field="*{precio}" step="0.01" required />
+        </div>
+        
+        <div>
+            <label for="exposicion">Exposición:</label>
+            <input type="checkbox" id="exposicion" th:field="*{exposicion}" />
+        </div>
+        
+        <div>
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</body>
+</html>

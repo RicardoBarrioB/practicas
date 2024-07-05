@@ -25,12 +25,19 @@ public class CocheService {
 		return coches.findAll();
 	}
 
-	public void delete(Coche coche) {
-		if (coche != null)
+	public Boolean deleteCoche(Coche coche) {
+		if (coche != null) {
 			coches.delete(coche);
+			return true;
+		}
+		return false;
 	}
 
-	public Optional<Coche> findById(long id){
+	public Boolean deleteById(Long id) {
+		return(deleteCoche(findById(id).orElse(null)));
+	}
+
+	public Optional<Coche> findById(Long id){
 		return coches.findById(id);
 	}
 }
