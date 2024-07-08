@@ -1,0 +1,63 @@
+<!-- src/main/resources/templates/car/list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Ventas</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript">
+        function editarVenta(id) {
+            window.location.href = '/ventas/editar-venta/' + id;
+        }
+        function nuevaVenta() {
+            window.location.href = '/ventas/nuevo';
+        }
+        function eliminarVenta(id) {
+            const confirm = window.confirm("¿Estás seguro de querer elimar el registro?");
+            if(confirm){
+                window.location.href = '/ventas/eliminar-venta/' + id;
+                setTimeout(function() {
+                    location.reload(true);
+                }, 1000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Lista de ventas</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Tipo Pago</th>
+                <th>Total</th>
+                <th>Id Cliente</th>
+                <th>Id Coche</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre la lista de ventas -->
+            <tr th:each="venta : ${ventas}">
+                <td th:text="${venta.id}">Id</td>
+                <td th:text="${venta.fecha}">Fecha</td>
+                <td th:text="${venta.tipoPago}">Tipo Pago</td>
+                <td th:text="${venta.total}">Total</td>
+                <td th:text="${venta.cliente.id}">Id Cliente</td>
+                <td th:text="${venta.coche.id}">Id Coche</td>
+                
+                <td>
+                    <div>
+                        <button th:onclick="'editarVenta(\'' + ${venta.id} + '\')'">Editar</button>
+                        <button th:onclick="'eliminarVenta(\'' + ${venta.id} + '\')'">Eliminar</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <div>
+                    <button th:onclick="nuevaVenta()">Añadir Nuevo</button>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

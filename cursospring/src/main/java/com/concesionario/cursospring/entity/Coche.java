@@ -13,18 +13,18 @@ import jakarta.persistence.Table;
 @Table(name = "coche")
 public class Coche implements Serializable{
 
-	long id;
+	Long id;
 	String marca;
 	String modelo;
 	String color;
 	String numeroSerie;
-	double precio;
-	boolean exposicion;
+	Double precio;
+	Boolean exposicion;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -78,7 +78,7 @@ public class Coche implements Serializable{
 	}
 
 	@Column(name = "exposicion")
-	public boolean getExposicion() {
+	public Boolean getExposicion() {
 		return exposicion;
 	}
 

@@ -13,21 +13,21 @@ import com.concesionario.cursospring.repository.CocheRepository;
 public class CocheService {
 	
 	@Autowired
-	private CocheRepository coches;
+	private CocheRepository cocheRepository;
 
 	public Coche save(Coche coche) {
 		if(coche != null)
-			return coches.save(coche);
+			return cocheRepository.save(coche);
 		return null;
 	}
 
 	public List<Coche> listAll() {
-		return coches.findAll();
+		return cocheRepository.findAll();
 	}
 
 	public Boolean deleteCoche(Coche coche) {
 		if (coche != null) {
-			coches.delete(coche);
+			cocheRepository.delete(coche);
 			return true;
 		}
 		return false;
@@ -38,6 +38,6 @@ public class CocheService {
 	}
 
 	public Optional<Coche> findById(Long id){
-		return coches.findById(id);
+		return cocheRepository.findById(id);
 	}
 }

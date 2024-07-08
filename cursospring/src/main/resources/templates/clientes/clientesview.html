@@ -1,0 +1,56 @@
+<!-- src/main/resources/templates/car/list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript">
+        function editarCliente(id) {
+            window.location.href = '/clientes/editar-cliente/' + id;
+        }
+        function nuevoCliente() {
+            window.location.href = '/clientes/nuevo';
+        }
+        function eliminarCliente(id) {
+            const confirm = window.confirm("¿Estás seguro de querer elimar el registro?");
+            if(confirm){
+                window.location.href = '/clientes/eliminar-cliente/' + id;
+                setTimeout(function() {
+                    location.reload(true);
+                }, 1000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Lista de Cliente</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Dni</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre la lista de clientes -->
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.id}">Id</td>
+                <td th:text="${cliente.dni}">Dni</td>
+                <td th:text="${cliente.nombre}">Nombre</td>
+                <td>
+                    <div>
+                        <button th:onclick="'editarCliente(\'' + ${cliente.id} + '\')'">Editar</button>
+                        <button th:onclick="'eliminarCliente(\'' + ${cliente.id} + '\')'">Eliminar</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <div>
+                    <button th:onclick="nuevoCliente()">Añadir Nuevo</button>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

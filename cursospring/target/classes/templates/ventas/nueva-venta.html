@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Venta</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <h1>Nuevo Venta</h1>
+    <form th:action="@{/ventas/nuevo}" th:object="${venta}" method="post">
+        <div>
+            <label for="fecha">Marca:</label>
+            <input type="text" id="fecha" th:field="*{fecha}" required />
+        </div>
+        
+        <div>
+            <label for="tipoPago">Tipo Pago:</label>
+            <input type="text" id="tipoPago" th:field="*{tipoPago}" required />
+        </div>
+        
+        <div>
+            <label for="total">Total:</label>
+            <input type="number" id="total" th:field="*{total}" required />
+        </div>
+        
+        <div>
+            <label for="cliente">Cliente:</label>
+            <select id="cliente" th:field="*{cliente}" required>
+                <option value="" disabled selected>Seleccione un cliente</option>
+                <option th:each="cliente : ${clientes}" th:value="${cliente}" th:text="${cliente.nombre}">Cliente</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="coche">Coche:</label>
+            <select id="coche" th:field="*{coche}" required>
+                <option value="" disabled selected>Seleccione un coche</option>
+                <option th:each="coche : ${coches}" th:value="${coche}" th:text="${coche.marca}">Coche</option>
+            </select>
+        </div>
+        
+        <div>
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</body>
+</html>

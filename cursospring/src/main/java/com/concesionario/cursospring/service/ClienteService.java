@@ -11,21 +11,21 @@ import com.concesionario.cursospring.repository.ClienteRepository;
 public class ClienteService {
 
 	@Autowired
-	private ClienteRepository clientes;
+	private ClienteRepository clienteRepository;
 
 	public Cliente save(Cliente cliente) {
 		if(cliente != null)
-			return clientes.save(cliente);
+			return clienteRepository.save(cliente);
 		return null;
 	}
 
 	public List<Cliente> listAll() {
-		return clientes.findAll();
+		return clienteRepository.findAll();
 	}
 
 	public Boolean deleteCliente(Cliente cliente) {
 		if (cliente != null) {
-			clientes.delete(cliente);
+			clienteRepository.delete(cliente);
 			return true;
 		}
 		return false;
@@ -36,6 +36,6 @@ public class ClienteService {
 	}
 
 	public Optional<Cliente> findById(Long id){
-		return clientes.findById(id);
+		return clienteRepository.findById(id);
 	}
 }

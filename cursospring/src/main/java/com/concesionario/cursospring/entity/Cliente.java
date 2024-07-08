@@ -21,5 +21,5 @@ public class Cliente {
 	Long id;
 	String dni;
 	String nombre;
-	Integer numCompras;
+	Integer numCompras = 0;
 }

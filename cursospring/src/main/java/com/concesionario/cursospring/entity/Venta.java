@@ -2,6 +2,8 @@ package com.concesionario.cursospring.entity;
 
 import java.time.Instant;
 
+import com.concesionario.cursospring.entity.enumeration.TipoPago;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

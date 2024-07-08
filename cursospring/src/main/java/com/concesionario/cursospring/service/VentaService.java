@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.concesionario.cursospring.entity.Venta;
 import com.concesionario.cursospring.repository.VentaRepository;
 
@@ -12,31 +13,41 @@ import com.concesionario.cursospring.repository.VentaRepository;
 public class VentaService {
 
 	@Autowired
-	private VentaRepository ventas;
+	private VentaRepository ventaRepository;
 
 	public Venta save(Venta venta) {
 		if(venta != null)
-			return ventas.save(venta);
+			return ventaRepository.save(venta);
 		return null;
 	}
 
 	public List<Venta> listAll() {
-		return ventas.findAll();
+		return ventaRepository.findAll();
 	}
 
-	public Boolean deleteCoche(Venta venta) {
+	public Boolean deleteVenta(Venta venta) {
 		if (venta != null) {
-			ventas.delete(venta);
+			ventaRepository.delete(venta);
 			return true;
 		}
 		return false;
 	}
 
 	public Boolean deleteById(Long id) {
-		return(deleteCoche(findById(id).orElse(null)));
+		return(deleteVenta(findById(id).orElse(null)));
 	}
 
 	public Optional<Venta> findById(Long id){
-		return ventas.findById(id);
+		return ventaRepository.findById(id);
+	}
+
+	public Optional<Venta> findByCocheId(Long id)
+	{
+		return (ventaRepository.findByCocheId(id));
+	}
+
+	public List<Venta> findByClienteId(Long id)
+	{
+		return (ventaRepository.findByClienteId(id));
 	}
 }

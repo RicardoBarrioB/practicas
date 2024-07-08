@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Venta</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <h1>Editar Venta</h1>
+    <form th:action="@{/ventas/editar-venta/{id}(id=${venta.id})}" th:object="${venta}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        
+        <div>
+            <label for="fecha">Fecha:</label>
+            <input type="text" id="fecha" th:field="*{fecha}" required />
+        </div>
+        
+        <div>
+            <label for="tipoPago">Tipo Pago:</label>
+            <input type="text" id="tipoPago" th:field="*{tipoPago}" required />
+        </div>
+        
+        <div>
+            <label for="total">Total:</label>
+            <input type="number" id="total" th:field="*{total}" required />
+        </div>
+        
+        <div>
+            <label for="idCliente">Id Cliente:</label>
+            <input type="number" id="idCliente" th:field="*{idCliente}" step="0.01" required />
+        </div>
+        
+        <div>
+            <label for="idCoche">Id Coche:</label>
+            <input type="number" id="idCoche" th:field="*{idCoche}" />
+        </div>
+        
+        <div>
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</body>
+</html>
