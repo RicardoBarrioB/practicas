@@ -17,6 +17,8 @@ public class Coche implements Serializable{
 	String marca;
 	String modelo;
 	String color;
+	String matricula;
+	String pegatina;
 	String numeroSerie;
 	Double precio;
 	Boolean exposicion;
@@ -57,6 +59,22 @@ public class Coche implements Serializable{
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getPegatina() {
+		return pegatina;
+	}
+
+	public void setPegatina(String pegatina) {
+		this.pegatina = pegatina;
 	}
 
 	@Column(name = "numSerie")

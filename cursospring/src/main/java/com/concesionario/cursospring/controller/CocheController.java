@@ -59,6 +59,7 @@ public class CocheController {
 		coche.get().setColor(cocheRecibido.getColor());
 		coche.get().setModelo(cocheRecibido.getModelo());
 		coche.get().setExposicion(cocheRecibido.getExposicion());
+        coche.get().setMatricula(cocheRecibido.getMatricula());
 		coche.get().setNumeroSerie(cocheRecibido.getNumeroSerie());
 		coche.get().setPrecio(cocheRecibido.getPrecio());
 		cocheService.save(coche.get());
