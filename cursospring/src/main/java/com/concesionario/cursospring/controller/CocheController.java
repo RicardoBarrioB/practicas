@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import com.concesionario.cursospring.entity.Coche;
+import com.concesionario.cursospring.entity.enumeration.Combustible;
 import com.concesionario.cursospring.excepcion.RecursoNoEncontradoExcepcion;
 import com.concesionario.cursospring.service.CocheService;
 
@@ -27,8 +28,9 @@ public class CocheController {
 	@GetMapping("/coches/all-coches")
 	public String getMethodName(ModelMap c) {
 		List<Coche> coches = cocheService.listAll();
-        c.put("coches", coches);
-		return "coches/cochesview";
+        c.addAttribute("coches", coches);
+		c.addAttribute("view", "coches/cochesview");
+		return "_t/frame";
 	}
 	
 	@GetMapping("/coches/eliminar-coche/{id}")
@@ -47,6 +49,7 @@ public class CocheController {
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         }
         model.addAttribute("coche", coche.get());
+        model.addAttribute("combustibles", Combustible.values());
         return "/coches/editar-coche";
     }
 
@@ -62,6 +65,7 @@ public class CocheController {
         coche.get().setMatricula(cocheRecibido.getMatricula());
 		coche.get().setNumeroSerie(cocheRecibido.getNumeroSerie());
 		coche.get().setPrecio(cocheRecibido.getPrecio());
+        coche.get().calcularPegatina();
 		cocheService.save(coche.get());
 		return ruta;
     }
@@ -69,11 +73,13 @@ public class CocheController {
 	@GetMapping("/coches/nuevo")
     public String formularioNuevoCoche(Model model) {
         model.addAttribute("coche", new Coche());
+        model.addAttribute("combustibles", Combustible.values());
         return "coches/nuevo-coche";
     }
 
     @PostMapping("/coches/nuevo")
     public String guardarNuevoCoche(@ModelAttribute Coche coche) {
+        coche.calcularPegatina();
         cocheService.save(coche);
         return ruta;
     }

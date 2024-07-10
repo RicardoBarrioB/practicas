@@ -12,12 +12,14 @@
         
         <div>
             <label for="fecha">Fecha:</label>
-            <input type="text" id="fecha" th:field="*{fecha}" required />
+            <input type="date" id="fecha" th:field="*{fecha}" required />
         </div>
         
         <div>
             <label for="tipoPago">Tipo Pago:</label>
-            <input type="text" id="tipoPago" th:field="*{tipoPago}" required />
+            <select id="tipoPago" name="tipoPago" required>
+                <option th:each="tipo : ${tiposPago}" th:value="${tipo}" th:text="${tipo}"></option>
+            </select>
         </div>
         
         <div>
@@ -26,13 +28,17 @@
         </div>
         
         <div>
-            <label for="idCliente">Id Cliente:</label>
-            <input type="number" id="idCliente" th:field="*{idCliente}" step="0.01" required />
+            <label for="cliente">Cliente:</label>
+            <select id="cliente" th:field="*{cliente}" required>
+                <option th:each="cliente : ${clientes}" th:value="${cliente}" th:text="${cliente.id}"></option>
+            </select>
         </div>
         
         <div>
-            <label for="idCoche">Id Coche:</label>
-            <input type="number" id="idCoche" th:field="*{idCoche}" />
+            <label for="coche">Coche:</label>
+            <select id="coche" th:field="*{coche}" required>
+                <option th:each="coche : ${coches}" th:value="${coche}" th:text="${coche.id}">Coche</option>
+            </select>
         </div>
         
         <div>

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.concesionario.cursospring.entity.Venta;
-import com.concesionario.cursospring.entity.venta;
+import com.concesionario.cursospring.entity.enumeration.TipoPago;
 import com.concesionario.cursospring.excepcion.RecursoNoEncontradoExcepcion;
 import com.concesionario.cursospring.service.ClienteService;
 import com.concesionario.cursospring.service.CocheService;
@@ -29,13 +29,14 @@ public class VentaControler {
 	private CocheService cocheService;
 	@Autowired
 	private ClienteService clienteService;
-    private String ruta = "redirect:/ventas/all-ventas";
+    private String ruta = "redirect:/ventas/find-all";
 
 	@GetMapping("/find-all")
-	public String getMethodName(ModelMap c) {
+	public String getMethodName(ModelMap v) {
 		List<Venta> ventas = ventaService.listAll();
-        c.put("ventas", ventas);
-		return "ventas/ventasview";
+        v.addAttribute("ventas", ventas);
+		v.addAttribute("view", "ventas/ventasview");
+		return "_t/frame";
 	}
 	
 	@GetMapping("/eliminar-venta/{id}")
@@ -48,17 +49,20 @@ public class VentaControler {
     }
 
 	@GetMapping("/editar-venta/{id}")
-    public String formularioEditarCliente(@PathVariable Long id, Model model) {
+    public String formularioEditarVenta(@PathVariable Long id, Model model) {
         Optional<Venta> venta = ventaService.findById(id);
         if (venta.isEmpty()) {
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         }
         model.addAttribute("venta", venta.get());
+		model.addAttribute("tiposPago", TipoPago.values());
+		model.addAttribute("clientes", clienteService.listAll());
+		model.addAttribute("coches", cocheService.listAll());
         return "ventas/editar-venta";
     }
 
 	@PostMapping("/editar-venta/{id}")
-    public String editarCliente(@PathVariable Long id, @ModelAttribute Venta ventaRecibida) {
+    public String editarVenta(@PathVariable Long id, @ModelAttribute Venta ventaRecibida) {
 		Optional<Venta> venta = ventaService.findById(id);
         if (venta.isEmpty())
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe:" + id);
@@ -72,8 +76,9 @@ public class VentaControler {
     }
 
 	@GetMapping("/nuevo")
-    public String formularioNuevoCliente(Model model) {
+    public String formularioNuevaVenta(Model model) {
         model.addAttribute("venta", new Venta());
+		model.addAttribute("tiposPago", TipoPago.values());
 		model.addAttribute("clientes", clienteService.listAll());
 		model.addAttribute("coches", cocheService.listAll());
         return "ventas/nueva-venta";

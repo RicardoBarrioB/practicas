@@ -1,6 +1,8 @@
 package com.concesionario.cursospring.entity;
 
-import java.time.Instant;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.concesionario.cursospring.entity.enumeration.TipoPago;
 
@@ -27,16 +29,17 @@ public class Venta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	Instant fecha;
+	private Long id;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	private LocalDate fecha;
 	@Enumerated(EnumType.STRING)
-	TipoPago tipoPago;
-	Double total;
+	private TipoPago tipoPago;
+	private Double total;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente")
-	Cliente cliente;
+	private Cliente cliente;
 	@OneToOne
 	@JoinColumn(name = "fk_coche")
-	Coche coche;
+	private Coche coche;
 }

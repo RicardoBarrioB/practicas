@@ -29,8 +29,9 @@ public class ClienteController {
 	@GetMapping("/all-clientes")
 	public String getMethodName(ModelMap c) {
 		List<Cliente> clientes = clienteService.listAll();
-        c.put("clientes", clientes);
-		return "clientes/clientesview";
+        c.addAttribute("clientes", clientes);
+		c.addAttribute("view", "clientes/clientesview");
+		return "_t/frame";
 	}
 	
 	@GetMapping("/eliminar-cliente/{id}")

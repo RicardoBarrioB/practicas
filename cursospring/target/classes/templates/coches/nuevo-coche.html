@@ -27,6 +27,14 @@
             <label for="matricula">Matricula:</label>
             <input type="text" id="matricula" th:field="*{matricula}" required />
         </div>
+
+        <div>
+            <label for="combustible">Combustible:</label>
+            <select id="combustible" name="combustible" equired>
+                <option value="" selected disabled>Seleccione un tipo de pago</option>
+                <option th:each="combustible : ${combustibles}" th:value="${combustible}" th:text="${combustible}"></option>
+            </select>
+        </div>
         
         <div>
             <label for="numeroSerie">Número de Serie:</label>

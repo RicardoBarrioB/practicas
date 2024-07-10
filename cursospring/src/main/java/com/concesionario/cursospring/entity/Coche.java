@@ -2,8 +2,12 @@ package com.concesionario.cursospring.entity;
 
 import java.io.Serializable;
 
+import com.concesionario.cursospring.entity.enumeration.Combustible;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,15 +17,17 @@ import jakarta.persistence.Table;
 @Table(name = "coche")
 public class Coche implements Serializable{
 
-	Long id;
-	String marca;
-	String modelo;
-	String color;
-	String matricula;
-	String pegatina;
-	String numeroSerie;
-	Double precio;
-	Boolean exposicion;
+	private Long id;
+	private String marca;
+	private String modelo;
+	private String color;
+	private String matricula;
+	@Enumerated(EnumType.STRING)
+	private Combustible combustible;
+	private String pegatina;
+	private String numeroSerie;
+	private Double precio = 0.0;
+	private Boolean exposicion;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +67,7 @@ public class Coche implements Serializable{
 		this.color = color;
 	}
 
+	@Column(name = "matricula")
 	public String getMatricula() {
 		return matricula;
 	}
@@ -69,13 +76,57 @@ public class Coche implements Serializable{
 		this.matricula = matricula;
 	}
 
+	@Column(name = "combustible")
+	public Combustible getCombustible() {
+		return combustible;
+	}
+
+	public void setCombustible(Combustible combustible) {
+		this.combustible = combustible;
+	}
+
+	@Column(name = "pegatina")
 	public String getPegatina() {
 		return pegatina;
 	}
 
 	public void setPegatina(String pegatina) {
-		this.pegatina = pegatina;
-	}
+        this.pegatina = pegatina;
+    }
+
+	public void calcularPegatina() {
+        this.pegatina = calcularPegatina(this.combustible, this.matricula);
+    }
+
+	public String calcularPegatina(Combustible combustible, String matricula){
+
+		String letras = matricula.substring(5);
+		
+		switch (combustible) {
+			case ELECTRICO:
+				return ("0");
+
+			case DIESEL:
+				if (letras.compareTo("HVF") > 0)
+					return ("C");
+				else if (letras.compareTo("DVB") > 0)
+					return ("B");
+				else
+					return("A");
+
+			case GASOLINA:
+				if (letras.compareTo("DVB") > 0)
+					return ("C");
+				else if (letras.compareTo("BBB") >= 0)
+					return ("B");
+				else
+					return("A");
+
+			default:
+				return ("A");
+		}
+	}	
+
 
 	@Column(name = "numSerie")
 	public String getNumeroSerie() {
@@ -130,4 +181,5 @@ public class Coche implements Serializable{
 	public String toString() {
 		return "Coche [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color + "]";
 	}
+
 }

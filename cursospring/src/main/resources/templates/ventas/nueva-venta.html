@@ -4,38 +4,52 @@
     <meta charset="UTF-8">
     <title>Nueva Venta</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!--<script th:inline="javascript">
+        function calcularTotal() {
+            var precioCoche = null; 
+            var total = document.getElementById('total');
+            if (precioCoche != null) {
+                total.value = (precioCoche * 0.21).toFixed(2);
+            } else {
+                total.value = '';
+            }
+        }
+    </script>-->
 </head>
 <body>
     <h1>Nuevo Venta</h1>
     <form th:action="@{/ventas/nuevo}" th:object="${venta}" method="post">
-        <div>
-            <label for="fecha">Marca:</label>
-            <input type="text" id="fecha" th:field="*{fecha}" required />
+       <div>
+            <label for="fecha">Fecha:</label>
+            <input type="datetime-local" id="fecha" name="fecha" required />
         </div>
         
         <div>
             <label for="tipoPago">Tipo Pago:</label>
-            <input type="text" id="tipoPago" th:field="*{tipoPago}" required />
+            <select id="tipoPago" name="tipoPago" equired>
+                <option value="" selected disabled>Seleccione un tipo de pago</option>
+                <option th:each="tipo : ${tiposPago}" th:value="${tipo}" th:text="${tipo}"></option>
+            </select>
         </div>
         
-        <div>
+       <div>
             <label for="total">Total:</label>
-            <input type="number" id="total" th:field="*{total}" required />
+            <input type="number" id="total" th:field="*{total}"/>
         </div>
         
         <div>
             <label for="cliente">Cliente:</label>
-            <select id="cliente" th:field="*{cliente}" required>
-                <option value="" disabled selected>Seleccione un cliente</option>
-                <option th:each="cliente : ${clientes}" th:value="${cliente}" th:text="${cliente.nombre}">Cliente</option>
+            <select id="cliente" name="cliente.id" required>
+                <option value="" selected disabled>Seleccione un cliente</option>
+                <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.id + ' ' +  cliente.nombre}"></option>
             </select>
         </div>
         
         <div>
             <label for="coche">Coche:</label>
-            <select id="coche" th:field="*{coche}" required>
-                <option value="" disabled selected>Seleccione un coche</option>
-                <option th:each="coche : ${coches}" th:value="${coche}" th:text="${coche.marca}">Coche</option>
+            <select id="coche" name="coche.id" required>
+                <option value="" selected disabled>Seleccione un coche</option>
+                <option th:each="coche : ${coches}" th:value="${coche.id}" th:text="${coche.id + ' ' +  coche.matricula}"></option>
             </select>
         </div>
         

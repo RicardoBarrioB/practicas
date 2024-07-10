@@ -43,8 +43,8 @@
                 <td th:text="${venta.fecha}">Fecha</td>
                 <td th:text="${venta.tipoPago}">Tipo Pago</td>
                 <td th:text="${venta.total}">Total</td>
-                <td th:text="${venta.cliente.id}">Id Cliente</td>
-                <td th:text="${venta.coche.id}">Id Coche</td>
+                <td th:text="${venta.cliente.id + ' ' + venta.cliente.nombre}">Id Cliente</td>
+                <td th:text="${venta.coche.id + ' ' + venta.coche.matricula}">Id Coche</td>
                 
                 <td>
                     <div>
