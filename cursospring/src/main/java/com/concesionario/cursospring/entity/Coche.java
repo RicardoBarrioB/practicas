@@ -94,40 +94,6 @@ public class Coche implements Serializable{
         this.pegatina = pegatina;
     }
 
-	public void calcularPegatina() {
-        this.pegatina = calcularPegatina(this.combustible, this.matricula);
-    }
-
-	public String calcularPegatina(Combustible combustible, String matricula){
-
-		String letras = matricula.substring(5);
-		
-		switch (combustible) {
-			case ELECTRICO:
-				return ("0");
-
-			case DIESEL:
-				if (letras.compareTo("HVF") > 0)
-					return ("C");
-				else if (letras.compareTo("DVB") > 0)
-					return ("B");
-				else
-					return("A");
-
-			case GASOLINA:
-				if (letras.compareTo("DVB") > 0)
-					return ("C");
-				else if (letras.compareTo("BBB") >= 0)
-					return ("B");
-				else
-					return("A");
-
-			default:
-				return ("A");
-		}
-	}	
-
-
 	@Column(name = "numSerie")
 	public String getNumeroSerie() {
 		return numeroSerie;

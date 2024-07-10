@@ -65,7 +65,7 @@ public class CocheController {
         coche.get().setMatricula(cocheRecibido.getMatricula());
 		coche.get().setNumeroSerie(cocheRecibido.getNumeroSerie());
 		coche.get().setPrecio(cocheRecibido.getPrecio());
-        coche.get().calcularPegatina();
+        cocheService.calcularPegatina(coche.get());
 		cocheService.save(coche.get());
 		return ruta;
     }
@@ -79,7 +79,7 @@ public class CocheController {
 
     @PostMapping("/coches/nuevo")
     public String guardarNuevoCoche(@ModelAttribute Coche coche) {
-        coche.calcularPegatina();
+        cocheService.calcularPegatina(coche);
         cocheService.save(coche);
         return ruta;
     }
