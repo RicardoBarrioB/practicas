@@ -63,6 +63,7 @@ public class CocheController {
 		coche.get().setModelo(cocheRecibido.getModelo());
 		coche.get().setExposicion(cocheRecibido.getExposicion());
         coche.get().setMatricula(cocheRecibido.getMatricula());
+        coche.get().setCombustible(cocheRecibido.getCombustible());
 		coche.get().setNumeroSerie(cocheRecibido.getNumeroSerie());
 		coche.get().setPrecio(cocheRecibido.getPrecio());
         cocheService.calcularPegatina(coche.get());

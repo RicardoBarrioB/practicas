@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Nuevo Coche</h1>
-    <form th:action="@{/coches/nuevo}" th:object="${coche}" method="post">
+    <form th:action="@{/coches/nuevo}" th:object="${coche}" method="post" onsubmit="return validarMatricula()">
         <div>
             <label for="marca">Marca:</label>
             <input type="text" id="marca" th:field="*{marca}" required />
@@ -23,15 +23,28 @@
             <input type="text" id="color" th:field="*{color}" required />
         </div>
 
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="matricula">Matrícula:</label>
+            <div style="display: flex; align-items: flex-start;">
+                <div style="display: flex; flex-direction: column; align-items: center; margin-right: 10px;">
+                    <input type="text" id="numerosMatricula" required />
+                    <span>Números</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <input type="text" id="letrasMatricula" required />
+                    <span>Letras</span>
+                </div>
+            </div>
+        </div>
+
         <div>
-            <label for="matricula">Matricula:</label>
-            <input type="text" id="matricula" th:field="*{matricula}" required />
+            <input type="hidden" id="matricula" th:field="*{matricula}" />
         </div>
 
         <div>
             <label for="combustible">Combustible:</label>
-            <select id="combustible" name="combustible" equired>
-                <option value="" selected disabled>Seleccione un tipo de pago</option>
+            <select id="combustible" name="combustible" required>
+                <option value="" selected disabled>Seleccione un tipo de combustible</option>
                 <option th:each="combustible : ${combustibles}" th:value="${combustible}" th:text="${combustible}"></option>
             </select>
         </div>
@@ -55,5 +68,27 @@
             <button type="submit">Guardar</button>
         </div>
     </form>
+
+    <script>
+        function validarMatricula() {
+            const numeros = document.getElementById('numerosMatricula').value;
+            const letras = document.getElementById('letrasMatricula').value.toUpperCase();
+            const matricula = document.getElementById('matricula');
+            
+            if (!/^\d{4}$/.test(numeros)) {
+                alert('Los números de la matrícula deben ser 4 dígitos');
+                return false;
+            }
+
+            if (!/^[B-DF-HJ-NP-TV-Z]{3}$/.test(letras)){
+                alert('Las letras de la matrícula deben ser consonantes.');
+                return false;
+            }
+
+            matricula.value = `${numeros} ${letras}`;
+
+            return true;
+        }
+    </script>
 </body>
 </html>
