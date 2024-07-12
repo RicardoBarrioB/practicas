@@ -1,5 +1,6 @@
 package com.concesionario.cursospring.controller;
 
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,7 @@ public class CocheController {
 		Optional<Coche> coche = cocheService.findById(id);
         if (coche.isEmpty())
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe:" + id);
+        String fechaITV = cocheService.findMesYAnio(cocheRecibido.getMatricula());
 		coche.get().setMarca(cocheRecibido.getMarca());
 		coche.get().setColor(cocheRecibido.getColor());
 		coche.get().setModelo(cocheRecibido.getModelo());
@@ -67,6 +69,7 @@ public class CocheController {
 		coche.get().setNumeroSerie(cocheRecibido.getNumeroSerie());
 		coche.get().setPrecio(cocheRecibido.getPrecio());
         cocheService.calcularPegatina(coche.get());
+        coche.get().setFechaItv(YearMonth.of(Integer.parseInt(fechaITV.substring(0, 4)) + 4, Integer.parseInt(fechaITV.substring(4))));
 		cocheService.save(coche.get());
 		return ruta;
     }
@@ -80,7 +83,9 @@ public class CocheController {
 
     @PostMapping("/coches/nuevo")
     public String guardarNuevoCoche(@ModelAttribute Coche coche) {
+        String fechaITV = cocheService.findMesYAnio(coche.getMatricula());
         cocheService.calcularPegatina(coche);
+        coche.setFechaItv(YearMonth.of(Integer.parseInt(fechaITV.substring(0, 4)) + 4, Integer.parseInt(fechaITV.substring(4))));
         cocheService.save(coche);
         return ruta;
     }

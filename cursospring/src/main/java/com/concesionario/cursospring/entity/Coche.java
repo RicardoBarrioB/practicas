@@ -1,6 +1,7 @@
 package com.concesionario.cursospring.entity;
 
 import java.io.Serializable;
+import java.time.YearMonth;
 
 import com.concesionario.cursospring.entity.enumeration.Combustible;
 
@@ -28,6 +29,7 @@ public class Coche implements Serializable{
 	private String numeroSerie;
 	private Double precio = 0.0;
 	private Boolean exposicion;
+	private YearMonth fechaItv;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -119,6 +121,15 @@ public class Coche implements Serializable{
 
 	public void setExposicion(Boolean exposicion) {
 		this.exposicion = exposicion;
+	}
+
+	@Column(name = "Fecha_ITV")
+	public YearMonth getFechaItv() {
+		return fechaItv;
+	}
+
+	public void setFechaItv(YearMonth fechaItv) {
+		this.fechaItv = fechaItv;
 	}
 
 	@Override
